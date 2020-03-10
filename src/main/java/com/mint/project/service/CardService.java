@@ -20,7 +20,7 @@ public class CardService {
     @Autowired
     private RestTemplate restTemplate;
 
-    @Value("third.party.api.url")
+    @Value("${third.party.api.url}")
     private String thirdPartyApiUrl;
 
     public VerifyCardResponse verifyCardByCardNumberFrom3rdPartyApi(String cardNumber){
@@ -29,9 +29,10 @@ public class CardService {
         return new VerifyCardResponse(cardVerifyFromApi.getBody());
     }
 
-    public HitCountResponse hitCount(String cardNumber){
-        String targetUrl = String.format("%s/%s", thirdPartyApiUrl, cardNumber);
+    public HitCountResponse getHitCounts(int start, int limit){
+        String targetUrl = String.format("%s/?start=%d&limit=%d", thirdPartyApiUrl, start, limit);
         ResponseEntity<HitCountFromApi> hitCountFromApi = restTemplate.getForEntity(targetUrl, HitCountFromApi.class, new HashMap<>());
         return new HitCountResponse(hitCountFromApi.getBody());
     }
+
 }

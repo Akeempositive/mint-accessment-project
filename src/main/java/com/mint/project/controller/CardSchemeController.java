@@ -1,12 +1,14 @@
 package com.mint.project.controller;
 
+import com.mint.project.model.HitCountResponse;
 import com.mint.project.model.VerifyCardResponse;
 import com.mint.project.service.CardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller("card-scheme")
+@Controller
+@RequestMapping("card-scheme")
 public class CardSchemeController {
 
     @Autowired

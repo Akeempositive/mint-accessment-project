@@ -2,7 +2,7 @@ package com.mint.project.model;
 
 public class CardVerifyFromApi {
 
-    private boolean success = false;
+    private boolean success = true;
     private String scheme;
     private String type;
     private Bank bank;
