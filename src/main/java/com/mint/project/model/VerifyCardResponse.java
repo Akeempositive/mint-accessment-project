@@ -27,7 +27,7 @@ public class VerifyCardResponse {
     }
 
     public VerifyCardResponse(){
-
+        this.success= false;
     }
 
     public VerifyCardResponse(CardVerifyFromApi cardVerifyFromApi){

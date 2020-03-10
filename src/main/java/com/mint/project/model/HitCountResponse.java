@@ -56,7 +56,7 @@ public class HitCountResponse {
     }
 
     public HitCountResponse(){
-
+        this.success = false;
     }
 
     public HitCountResponse(HitCountFromApi hitCountFromApi){
