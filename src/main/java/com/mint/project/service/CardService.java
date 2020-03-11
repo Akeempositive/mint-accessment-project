@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,6 +25,11 @@ public class CardService {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private KafkaTemplate<String, VerifyCardResponse> kafkaTemplate;
+
+    private final String TOPIC = "topic";
+
     @Value("${third.party.api.url}")
     private String thirdPartyApiUrl;
 
@@ -36,6 +42,10 @@ public class CardService {
             logger.error("An error has occured : {}", ex.getMessage());
             return new VerifyCardResponse();
         }
+    }
+
+    public void publishToKafka(String cardNumber){
+        kafkaTemplate.send(TOPIC, verifyCardByCardNumberFrom3rdPartyApi(cardNumber));
     }
 
     public HitCountResponse getHitCounts(int start, int limit){
