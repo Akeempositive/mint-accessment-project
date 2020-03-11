@@ -26,8 +26,8 @@ class CardServiceTest {
         VerifyCardResponse verifyCardResponse = cardService.verifyCardByCardNumberFrom3rdPartyApi("539923");
         Assert.that(verifyCardResponse.isSuccess(), "The API is not accessible. Third party api not valid/bad network connection");
         Map<String, String> payload = verifyCardResponse.getPayload();
-        Assert.that(payload.get("scheme") == "Mastercard", "The Scheme of 5399 is no longer mastercard. Probably an outdated result expected");
-        Assert.that(payload.get("bank") == "FBN", "The BIN of First bank is no longer 539923. Expectation and requirements has changed");
+        Assert.that(payload.get("scheme").equals("mastercard"), "The Scheme of 5399 is no longer mastercard. Probably an outdated result expected");
+        Assert.that(payload.get("bank").equals("FIRST"), "The BIN of First bank is no longer 539923. Expectation and requirements has changed");
     }
 
     @Test
