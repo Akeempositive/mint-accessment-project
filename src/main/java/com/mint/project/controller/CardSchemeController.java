@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("card-scheme")
+@RequestMapping("api/card-scheme")
 public class CardSchemeController {
 
     @Autowired
