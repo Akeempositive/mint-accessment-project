@@ -23,10 +23,10 @@ public class CardService {
     private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
     @Autowired
-    private RestTemplate restTemplate;
+    private ProducerService producerService;
 
     @Autowired
-    private KafkaTemplate<String, VerifyCardResponse> kafkaTemplate;
+    private RestTemplate restTemplate;
 
     private final String TOPIC = "topic";
 
@@ -44,8 +44,10 @@ public class CardService {
         }
     }
 
-    public void publishToKafka(String cardNumber){
-        kafkaTemplate.send(TOPIC, verifyCardByCardNumberFrom3rdPartyApi(cardNumber));
+    public VerifyCardResponse publishToKafka(String cardNumber){
+        VerifyCardResponse verifyCardResponse = verifyCardByCardNumberFrom3rdPartyApi(cardNumber);
+        producerService.sendMessage(verifyCardResponse.toString());
+        return verifyCardResponse;
     }
 
     public HitCountResponse getHitCounts(int start, int limit){

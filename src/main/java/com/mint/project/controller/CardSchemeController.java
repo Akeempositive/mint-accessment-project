@@ -15,8 +15,8 @@ public class CardSchemeController {
     private CardService cardService;
 
     @RequestMapping(method = RequestMethod.GET, value = "verify/{cardNumber}")
-    public void verifyCard(@PathVariable("cardNumber") String cardNumber){
-        cardService.publishToKafka(cardNumber);
+    public @ResponseBody VerifyCardResponse verifyCard(@PathVariable("cardNumber") String cardNumber){
+        return cardService.publishToKafka(cardNumber);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "stats")

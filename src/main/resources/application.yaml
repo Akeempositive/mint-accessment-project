@@ -1,11 +1,8 @@
 server:
   port: 9000
-spring:
-   kafka:
-     producer:
-        key-serializer: org.apache.kafka.common.serialization.StringSerializer
-        value-serializer: org.apache.kafka.common.serialization.StringSerializer
-        bootstrap-servers: 3000
+bootstrap:
+  server:
+    address: localhost:9092
 third:
   party:
     api:
